@@ -2,10 +2,8 @@
 
 namespace PrintNodeNet
 {
-    public class PrintNodeDelegatedClientContext : IDisposable
+    public class PrintNodeDelegatedClientContext
     {
-        public static PrintNodeDelegatedClientContext Current { get; private set; }
-
         internal PrintNodeDelegatedClientContextAuthenticationMode AuthenticationMode;
 
         internal string AuthenticationValue { get; private set; }
@@ -14,19 +12,12 @@ namespace PrintNodeNet
         {
             AuthenticationValue = accountId.ToString();
             AuthenticationMode = PrintNodeDelegatedClientContextAuthenticationMode.Id;
-            Current = this;
         }
 
         public PrintNodeDelegatedClientContext(string email)
         {
             AuthenticationValue = email;
             AuthenticationMode = PrintNodeDelegatedClientContextAuthenticationMode.Email;
-            Current = this;
-        }
-
-        public void Dispose()
-        {
-            Current = null;
         }
     }
 }
